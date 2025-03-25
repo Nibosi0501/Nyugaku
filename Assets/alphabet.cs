@@ -21,12 +21,16 @@ public class alphabet : MonoBehaviour
     [SerializeField] private GameObject alphabetV;
     [SerializeField] private GameObject alphabetX;
 
+    private AudioSource audioSource;
+
     void Start()
     {
         if (targetAlphabetsNumber.Length != 2)
         {
             Debug.LogWarning("targetAlphabetsNumberの要素数が2ではありません");
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -110,35 +114,39 @@ public class alphabet : MonoBehaviour
 
     private IEnumerator CreateAlphabetCoroutine(int alphabet, int count, int displayNumber)
     {
+        float y = 5.0f;
+        float z = -1.0f;
         for (int i = 0; i < count; i++)
         {
             GameObject obj = null;
-            float randomX = GetRandomFloat(-3.0f, 3.0f);
+            float randomX = GetRandomFloat(-14.5f, -1.5f);
             if (displayNumber == 1)
             {
-                randomX = GetRandomFloat(-3.0f, 3.0f);
+                randomX = GetRandomFloat(-14.5f, -1.5f);
             }
             else if (displayNumber == 2)
             {
-                randomX = GetRandomFloat(7.5f, 13.5f);
+                randomX = GetRandomFloat(1.5f, 14.5f);
             }
             switch (alphabet)
             {
-                case 9: obj = Instantiate(alphabetA, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 4: obj = Instantiate(alphabetB, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 3: obj = Instantiate(alphabetC, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 7: obj = Instantiate(alphabetD, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 1: obj = Instantiate(alphabetE, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 12: obj = Instantiate(alphabetH, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 13: obj = Instantiate(alphabetK, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 10: obj = Instantiate(alphabetL, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 5: obj = Instantiate(alphabetM, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 6: obj = Instantiate(alphabetP, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 8: obj = Instantiate(alphabetS, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 11: obj = Instantiate(alphabetT, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 2: obj = Instantiate(alphabetV, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
-                case 14: obj = Instantiate(alphabetX, new Vector3(randomX, 3.5f, -6.7f), Quaternion.Euler(0, 180, 0)); break;
+                case 9: obj = Instantiate(alphabetA, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 4: obj = Instantiate(alphabetB, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 3: obj = Instantiate(alphabetC, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 7: obj = Instantiate(alphabetD, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 1: obj = Instantiate(alphabetE, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 12: obj = Instantiate(alphabetH, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 13: obj = Instantiate(alphabetK, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 10: obj = Instantiate(alphabetL, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 5: obj = Instantiate(alphabetM, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 6: obj = Instantiate(alphabetP, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 8: obj = Instantiate(alphabetS, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 11: obj = Instantiate(alphabetT, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 2: obj = Instantiate(alphabetV, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 14: obj = Instantiate(alphabetX, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
             }
+            audioSource.Play();
+
 
             yield return new WaitForSeconds(GetRandomFloat(0.1f, 0.3f)); // 0.1〜0.5秒ランダムに待機
         }

@@ -6,24 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/EV.unity
-    guid: a584daa46819545968a03bb7348d3396
+    path: Assets/Scenes/movie.unity
+    guid: 2b1eeab698a2b4957ba0013803b3b034
   - enabled: 1
-    path: Assets/Scenes/CB.unity
-    guid: ccf12cea1702f46e28b8b52b8ea65b4d
+    path: Assets/Scenes/EV 1.unity
+    guid: 09914d46fb2574d1dbe086d7a1ed7ac6
   - enabled: 1
-    path: Assets/Scenes/MP.unity
-    guid: 10ea84cc4c6614246b630e6b198db5e0
+    path: Assets/Scenes/CB 1.unity
+    guid: 4b5355d3410184dfd98ab31f5a285abd
   - enabled: 1
-    path: Assets/Scenes/DS.unity
-    guid: fa10369ac80d64ef393a43813b39bedc
+    path: Assets/Scenes/MP 1.unity
+    guid: 308bb6481c34e4fcb86f8da9f570f2bf
   - enabled: 1
-    path: Assets/Scenes/AL.unity
-    guid: 9ebeacf260e1f4af9a7c6c82bee32ce0
+    path: Assets/Scenes/DS 1.unity
+    guid: 45bc3e5f6f6f14ddbbaac11feacdc8cb
   - enabled: 1
-    path: Assets/Scenes/TH.unity
-    guid: 0aa224ac9d2904e5db86fa977fdf1e81
+    path: Assets/Scenes/AL 1.unity
+    guid: e8327363b525b4ac0ada1191b0d903bd
   - enabled: 1
-    path: Assets/Scenes/KX.unity
-    guid: 16bc4484b0149457081a4c95fb8f51fc
+    path: Assets/Scenes/TH 1.unity
+    guid: 837620e4a12064efdbdd78a5b5907323
+  - enabled: 1
+    path: Assets/Scenes/KX 1.unity
+    guid: c36c98775000d4370aad65ee6b26ed31
   m_configObjects: {}
