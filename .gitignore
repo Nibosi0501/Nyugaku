@@ -76,4 +76,4 @@ crashlytics-build.properties
 *.mp4
 *.mp4.meta
 *.mov
-*.mpv.meta
+*.mov.meta
