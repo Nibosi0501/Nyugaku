@@ -23,11 +23,33 @@ public class alphabet : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private bool isOsaraiScene = false;
+
+    private bool isSakuraScene = false;
+
+    private Sakura sakura;
+
     void Start()
     {
-        if (targetAlphabetsNumber.Length != 2)
+        sakura = GetComponent<Sakura>();
+
+        if (targetAlphabetsNumber.Length == 2)
+        {
+            Debug.Log("targetAlphabetsNumberの要素数は2です");
+        }
+        else if (targetAlphabetsNumber.Length == 0)
+        {
+            Debug.Log("targetAlphabetsNumberの要素数は0です");
+            Debug.Log("桜シーンと認定します");
+            //sakura.CreateSakura();
+            isSakuraScene = true;
+
+        }
+        else
         {
             Debug.LogWarning("targetAlphabetsNumberの要素数が2ではありません");
+            Debug.Log("おさらいシーンと認定します");
+            isOsaraiScene = true;
         }
 
         audioSource = GetComponent<AudioSource>();
@@ -102,6 +124,19 @@ public class alphabet : MonoBehaviour
 
     public void CreateAlphabet(int alphabet, int count)
     {
+        if (isOsaraiScene)
+        {
+            Debug.Log("おさらいシーンです");
+            StartCoroutine(CreateAllAlphabetCoroutine(alphabet, count));
+            return;
+        }
+        if (isSakuraScene)
+        {
+            Debug.Log("桜シーンです");
+            sakura.CreateSakura();
+            return;
+        }
+
         if (alphabet == targetAlphabetsNumber[0])
         {
             StartCoroutine(CreateAlphabetCoroutine(alphabet, count, 1));
@@ -109,6 +144,47 @@ public class alphabet : MonoBehaviour
         else if (alphabet == targetAlphabetsNumber[1])
         {
             StartCoroutine(CreateAlphabetCoroutine(alphabet, count, 2));
+        }
+    }
+
+    private IEnumerator CreateAllAlphabetCoroutine(int alphabet, int count)
+    {
+        float y = 5.0f;
+        float z = -1.0f;
+        for (int i = 0; i < count; i++)
+        {
+            GameObject obj = null;
+            float rand = Random.value; // 0.0 ～ 1.0 の乱数を取得
+            float randomX;
+            if (rand > 0.5f)
+            {
+                randomX = GetRandomFloat(-14.5f, -1.5f);
+            }
+            else
+            {
+                randomX = GetRandomFloat(1.5f, 14.5f);
+            }
+            switch (alphabet)
+            {
+                case 9: obj = Instantiate(alphabetA, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 4: obj = Instantiate(alphabetB, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 3: obj = Instantiate(alphabetC, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 7: obj = Instantiate(alphabetD, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 1: obj = Instantiate(alphabetE, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 12: obj = Instantiate(alphabetH, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 13: obj = Instantiate(alphabetK, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 10: obj = Instantiate(alphabetL, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 5: obj = Instantiate(alphabetM, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 6: obj = Instantiate(alphabetP, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 8: obj = Instantiate(alphabetS, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 11: obj = Instantiate(alphabetT, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 2: obj = Instantiate(alphabetV, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+                case 14: obj = Instantiate(alphabetX, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
+            }
+            audioSource.Play();
+
+
+            yield return new WaitForSeconds(GetRandomFloat(0.1f, 0.3f)); // 0.1〜0.5秒ランダムに待機
         }
     }
 

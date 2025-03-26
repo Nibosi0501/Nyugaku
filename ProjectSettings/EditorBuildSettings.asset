@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/KX 1.unity
     guid: c36c98775000d4370aad65ee6b26ed31
+  - enabled: 1
+    path: Assets/Scenes/Osarai.unity
+    guid: f2e830e24b5884b8d858e76cdfcb83be
+  - enabled: 1
+    path: Assets/Scenes/Japan.unity
+    guid: 36f8a9206dbce4cccb6494b9e78ef66c
   m_configObjects: {}
