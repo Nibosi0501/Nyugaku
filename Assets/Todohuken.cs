@@ -19,6 +19,9 @@ public class Todohuken : MonoBehaviour
 
     [SerializeField] private ChangeScene changeScene;
 
+    [SerializeField] private Camera camera1;
+    [SerializeField] private Camera camera2;
+
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -57,14 +60,41 @@ public class Todohuken : MonoBehaviour
                 break;
             case 9:
                 //changeScene.NextScene();
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
+                gameObject.transform.position = new Vector3(0, 0, 10);
                 break;
             case 10:
-                changeScene.NextScene();
+                //changeScene.NextScene();
+                // カメラ２つの現在のy座標をを引数で指定した値に徐々に変化させる関数を呼び出す
+                StartCoroutine(MoveCameras(-600f, 3.0f));
                 break;
             default:
                 Debug.LogWarning("todohukenNumberが不正です");
                 break;
         }
+    }
+
+    private IEnumerator MoveCameras(float targetY, float duration)
+    {
+        float elapsedTime = 0f;
+
+        Vector3 startPos1 = camera1.transform.position;
+        Vector3 startPos2 = camera2.transform.position;
+
+        Vector3 targetPos1 = new Vector3(startPos1.x, targetY, startPos1.z);
+        Vector3 targetPos2 = new Vector3(startPos2.x, targetY, startPos2.z);
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            camera1.transform.position = Vector3.Lerp(startPos1, targetPos1, t);
+            camera2.transform.position = Vector3.Lerp(startPos2, targetPos2, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 最後にピッタリ目標値に合わせる
+        camera1.transform.position = targetPos1;
+        camera2.transform.position = targetPos2;
     }
 }

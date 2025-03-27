@@ -453,6 +453,7 @@ public class Sakura : MonoBehaviour
                 yield return null;
             }
             yield return new WaitForSeconds(20.0f);
+            isCreateSakuraStart = false;
             mode++;
             todohukenScript.ChangeMaterial(mode);
             yield break;
