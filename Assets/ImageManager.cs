@@ -57,11 +57,11 @@ public class ImageManager : MonoBehaviour
             Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.H) ||
             Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.K))
         {
-            isSenkoAlphabet = ChangeSenkoAlphabet();
+            //isSenkoAlphabet = ChangeSenkoAlphabet();
         }
     }
 
-    private bool ChangeSenkoAlphabet()
+    public bool ChangeSenkoAlphabet()
     {
         if (!isSenkoAlphabet)
         {

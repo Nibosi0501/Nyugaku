@@ -906,6 +906,7 @@ GameObject:
   - component: {fileID: 963194231}
   - component: {fileID: 963194232}
   - component: {fileID: 963194233}
+  - component: {fileID: 963194234}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1045,10 +1046,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 97fc2e795d5d84ead82852d3314d133c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d2822c4bcffd44534b0c4054b0a90004, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1146,6 +1147,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df55de223ed7482bbf412468a1343b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &963194234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb25241ecc2f549819af769ab9672de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  a: {fileID: 963194232}
+  b: {fileID: 8300000, guid: d2822c4bcffd44534b0c4054b0a90004, type: 3}
 --- !u!1 &1122813056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,6 +1986,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef4b31a7d46a48c0a151ee8ac38804e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SenkoAlphabetLeft: {fileID: 0}
+  SenkoAlphabetRight: {fileID: 0}
+  SenkoPhotoLeft: {fileID: 0}
+  SenkoPhotoRight: {fileID: 0}
+  SenkoPhotoEndScale: {x: 0.6, y: 1, z: 0.6}
   GakkaStartPosition: {x: 23, y: 3.9, z: -0.01}
   GakkaEndPosition: {x: 0, y: 3.9, z: -0.01}
   SenkoLeftStartPosition: {x: 22, y: -3.9, z: -0.01}

@@ -56,6 +56,10 @@ public class Todohuken : MonoBehaviour
                 meshRenderer.material = todohukenMaterial9;
                 break;
             case 9:
+                //changeScene.NextScene();
+                gameObject.SetActive(false);
+                break;
+            case 10:
                 changeScene.NextScene();
                 break;
             default:

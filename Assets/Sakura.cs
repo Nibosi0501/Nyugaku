@@ -10,6 +10,9 @@ public class Sakura : MonoBehaviour
     // 桜プレハブ
     [SerializeField] private GameObject sakuraPrefab;
 
+    // 絵文字プレハブ
+    [SerializeField] private GameObject[] emojiPrefab;
+
     // モードフラグ
     private int mode = 0;
 
@@ -79,8 +82,22 @@ public class Sakura : MonoBehaviour
     private Vector3[] Kyushu2Area;
     private Vector3[] Kyushu3Area;
 
+    // 絵文字エリア
+    [SerializeField] private GameObject AllEmoji;
+    private Vector3[] AllEmojiArea;
+
     // 桜が咲く音
-    private AudioSource audioSource;
+    //private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
+
+
+    //List<Vector3[]> areas = new List<Vector3[]>();
+    // ずんだもん
+    [SerializeField] private AudioSource ZundaAudioSource;
+    [SerializeField] private AudioClip[] zundaClips;
+
+    private bool isCreateSakuraStart = false;
 
     void Start()
     {
@@ -128,10 +145,13 @@ public class Sakura : MonoBehaviour
         Kyushu2Area = CalculatArea(Kyushu2);
         Kyushu3Area = CalculatArea(Kyushu3);
 
+        // 絵文字エリア
+        AllEmojiArea = CalculatArea(AllEmoji);
+
         StartCoroutine(ChangeMode());
         todohukenScript = todouhuken.GetComponent<Todohuken>();
 
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -221,76 +241,135 @@ public class Sakura : MonoBehaviour
         return new Vector3(randomX, randomY, Z);
     }
 
-    public void CreateSakura()
+    public void CreateSakura(int alphabet, int count)
     {
+        if (isCreateSakuraStart == false)
+        {
+            Debug.Log("最初の音声が終わるまでは待機します");
+            return;
+        }
         //Debug.Log("桜を生成します");
 
         List<Vector3[]> areas = new List<Vector3[]>();
         Vector3 randomPosition = new Vector3(0, 0, -0.02f);
-        switch (mode)
+        GameObject targetObject = sakuraPrefab;
+        for (int i = 0; i < count; i++)
         {
-            case 0:
-                areas.Add(HokkaidoArea);
-                randomPosition = GetRandomPosition(areas);
+            switch (mode)
+            {
+                case 0:
+                    areas.Add(HokkaidoArea);
+                    randomPosition = GetRandomPosition(areas);
 
-                break;
-            case 1:
-                areas.Add(Tohoku1Area);
-                areas.Add(Tohoku2Area);
-                randomPosition = GetRandomPosition(areas);
+                    break;
+                case 1:
+                    //areas.Add(Tohoku1Area);
+                    //areas.Add(Tohoku2Area);
+                    areas.Add(Kyushu1Area);
+                    areas.Add(Kyushu2Area);
+                    areas.Add(Kyushu3Area);
+                    randomPosition = GetRandomPosition(areas);
 
-                break;
-            case 2:
-                areas.Add(Kanto1Area);
-                areas.Add(Kanto2Area);
-                areas.Add(Kanto3Area);
-                areas.Add(Kanto4Area);
-                areas.Add(Kanto5Area);
-                randomPosition = GetRandomPosition(areas);
+                    break;
+                case 2:
+                    //areas.Add(Kanto1Area);
+                    //areas.Add(Kanto2Area);
+                    //areas.Add(Kanto3Area);
+                    //areas.Add(Kanto4Area);
+                    //areas.Add(Kanto5Area);
+                    areas.Add(Tohoku1Area);
+                    areas.Add(Tohoku2Area);
+                    randomPosition = GetRandomPosition(areas);
 
-                break;
-            case 3:
-                areas.Add(HokuKou1Area);
-                areas.Add(HokuKou2Area);
-                areas.Add(HokuKou3Area);
-                areas.Add(HokuKou4Area);
-                areas.Add(HokuKou5Area);
-                randomPosition = GetRandomPosition(areas);
+                    break;
+                case 3:
+                    //areas.Add(HokuKou1Area);
+                    //areas.Add(HokuKou2Area);
+                    //areas.Add(HokuKou3Area);
+                    //areas.Add(HokuKou4Area);
+                    //areas.Add(HokuKou5Area);
+                    areas.Add(Shikoku1Area);
+                    randomPosition = GetRandomPosition(areas);
 
-                break;
-            case 4:
-                areas.Add(Toukai1Area);
-                areas.Add(Toukai2Area);
-                areas.Add(Toukai3Area);
-                randomPosition = GetRandomPosition(areas);
+                    break;
+                case 4:
+                    areas.Add(Kanto1Area);
+                    areas.Add(Kanto2Area);
+                    areas.Add(Kanto3Area);
+                    areas.Add(Kanto4Area);
+                    areas.Add(Kanto5Area);
+                    //areas.Add(Toukai1Area);
+                    //areas.Add(Toukai2Area);
+                    //areas.Add(Toukai3Area);
+                    randomPosition = GetRandomPosition(areas);
 
-                break;
-            case 5:
-                areas.Add(Kansai1Area);
-                areas.Add(Kansai2Area);
-                areas.Add(Kansai3Area);
-                randomPosition = GetRandomPosition(areas);
+                    break;
+                case 5:
+                    //areas.Add(Kansai1Area);
+                    //areas.Add(Kansai2Area);
+                    //areas.Add(Kansai3Area);
+                    areas.Add(Chugoku1Area);
+                    randomPosition = GetRandomPosition(areas);
 
-                break;
-            case 6:
-                areas.Add(Chugoku1Area);
-                randomPosition = GetRandomPosition(areas);
+                    break;
+                case 6:
+                    //areas.Add(Chugoku1Area);
+                    areas.Add(HokuKou1Area);
+                    areas.Add(HokuKou2Area);
+                    areas.Add(HokuKou3Area);
+                    areas.Add(HokuKou4Area);
+                    areas.Add(HokuKou5Area);
+                    randomPosition = GetRandomPosition(areas);
 
-                break;
-            case 7:
-                areas.Add(Shikoku1Area);
-                randomPosition = GetRandomPosition(areas);
+                    break;
+                case 7:
+                    //areas.Add(Shikoku1Area);
+                    areas.Add(Kansai1Area);
+                    areas.Add(Kansai2Area);
+                    areas.Add(Kansai3Area);
+                    randomPosition = GetRandomPosition(areas);
 
-                break;
-            case 8:
-                areas.Add(Kyushu1Area);
-                areas.Add(Kyushu2Area);
-                areas.Add(Kyushu3Area);
-                randomPosition = GetRandomPosition(areas);
-                break;
+                    break;
+                case 8:
+                    //areas.Add(Kyushu1Area);
+                    //areas.Add(Kyushu2Area);
+                    //areas.Add(Kyushu3Area);
+                    areas.Add(Toukai1Area);
+                    areas.Add(Toukai2Area);
+                    areas.Add(Toukai3Area);
+                    randomPosition = GetRandomPosition(areas);
+                    break;
+                case 9:
+                    areas.Add(AllEmojiArea);
+                    randomPosition = GetRandomPosition(areas);
+                    // alpahabet に応じた絵文字プレハブをtargetObjectに代入
+                    switch (alphabet)
+                    {
+                        case 1:
+                            targetObject = emojiPrefab[0];
+                            break;
+                        case 2:
+                            targetObject = emojiPrefab[1];
+                            break;
+                        case 3:
+                            targetObject = emojiPrefab[2];
+                            break;
+                        case 4:
+                            targetObject = emojiPrefab[3];
+                            break;
+                        case 5:
+                            targetObject = emojiPrefab[4];
+                            break;
+                        case 6:
+                            targetObject = emojiPrefab[5];
+                            break;
+                    }
+                    break;
+            }
+            Instantiate(targetObject, randomPosition, Quaternion.Euler(90, 90, -90));
+            // audioSource.Play();
+            audioSource.PlayOneShot(audioClip);
         }
-        Instantiate(sakuraPrefab, randomPosition, Quaternion.Euler(90, 90, -90));
-        audioSource.Play();
     }
 
     void Update()
@@ -299,58 +378,94 @@ public class Sakura : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             mode = 0;
+            todohukenScript.ChangeMaterial(mode);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             mode = 1;
+            todohukenScript.ChangeMaterial(mode);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             mode = 2;
+            todohukenScript.ChangeMaterial(mode);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             mode = 3;
+            todohukenScript.ChangeMaterial(mode);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             mode = 4;
+            todohukenScript.ChangeMaterial(mode);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             mode = 5;
+            todohukenScript.ChangeMaterial(mode);
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             mode = 6;
+            todohukenScript.ChangeMaterial(mode);
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
             mode = 7;
+            todohukenScript.ChangeMaterial(mode);
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             mode = 8;
+            todohukenScript.ChangeMaterial(mode);
         }
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             mode = 9;
+            todohukenScript.ChangeMaterial(mode);
         }
     }
 
     private IEnumerator ChangeMode()
     {
-        yield return new WaitForSeconds(5.0f);
+        ZundaAudioSource.PlayOneShot(zundaClips[mode]);
+        while (ZundaAudioSource.isPlaying)
+        {
+            yield return null;
+        }
+        isCreateSakuraStart = true;
+        yield return new WaitForSeconds(20.0f);
         mode++;
         Debug.Log("モードを変更します:" + mode);
         todohukenScript.ChangeMaterial(mode);
-        if (mode > 9)
+        if (mode >= 9)
         {
-            Debug.Log("モードが一周しました");
+            ZundaAudioSource.PlayOneShot(zundaClips[10]);
+            while (ZundaAudioSource.isPlaying)
+            {
+                yield return null;
+            }
+            AllEmozi();
+            ZundaAudioSource.PlayOneShot(zundaClips[mode]);
+            while (ZundaAudioSource.isPlaying)
+            {
+                yield return null;
+            }
+            yield return new WaitForSeconds(20.0f);
+            mode++;
+            todohukenScript.ChangeMaterial(mode);
             yield break;
         }
         StartCoroutine(ChangeMode());
     }
+
+    private void AllEmozi()
+    {
+        Debug.Log("全エリアに絵文字を表示します。");
+    }
+
+
 
     public int GetMode()
     {

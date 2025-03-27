@@ -21,7 +21,8 @@ public class alphabet : MonoBehaviour
     [SerializeField] private GameObject alphabetV;
     [SerializeField] private GameObject alphabetX;
 
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
 
     private bool isOsaraiScene = false;
 
@@ -52,7 +53,7 @@ public class alphabet : MonoBehaviour
             isOsaraiScene = true;
         }
 
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -133,7 +134,7 @@ public class alphabet : MonoBehaviour
         if (isSakuraScene)
         {
             Debug.Log("桜シーンです");
-            sakura.CreateSakura();
+            sakura.CreateSakura(alphabet, count);
             return;
         }
 
@@ -181,7 +182,8 @@ public class alphabet : MonoBehaviour
                 case 2: obj = Instantiate(alphabetV, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
                 case 14: obj = Instantiate(alphabetX, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
             }
-            audioSource.Play();
+            //audioSource.Play();
+            audioSource.PlayOneShot(audioClip);
 
 
             yield return new WaitForSeconds(GetRandomFloat(0.1f, 0.3f)); // 0.1〜0.5秒ランダムに待機
@@ -221,7 +223,8 @@ public class alphabet : MonoBehaviour
                 case 2: obj = Instantiate(alphabetV, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
                 case 14: obj = Instantiate(alphabetX, new Vector3(randomX, y, z), Quaternion.Euler(0, 180, 0)); break;
             }
-            audioSource.Play();
+            //audioSource.Play();
+            audioSource.PlayOneShot(audioClip);
 
 
             yield return new WaitForSeconds(GetRandomFloat(0.1f, 0.3f)); // 0.1〜0.5秒ランダムに待機
