@@ -14,6 +14,7 @@ public class UdpReceiver : MonoBehaviour
     private bool isClosing = false; // クラス変数として追加
 
     private alphabet alphabet;
+    private Emoji emoji;
 
     void Start()
     {
@@ -22,6 +23,20 @@ public class UdpReceiver : MonoBehaviour
         udpClient.BeginReceive(new AsyncCallback(OnUdpDataReceived), null);
 
         alphabet = GetComponent<alphabet>();
+        emoji = GetComponent<Emoji>();
+
+        if (alphabet == null && emoji == null)
+        {
+            Debug.LogError("Alphabet or Emoji script is required.");
+        }
+        else if (alphabet != null)
+        {
+            Debug.Log("アルファベットシーン");
+        }
+        else if (emoji != null)
+        {
+            Debug.Log("絵文字シーン");
+        }
     }
 
     void OnUdpDataReceived(IAsyncResult result)
@@ -72,7 +87,14 @@ public class UdpReceiver : MonoBehaviour
                 {
                     if (receivedCounts[i] > 0)
                     {
-                        alphabet.CreateAlphabet(i + 1, receivedCounts[i]);
+                        if (alphabet != null)
+                        {
+                            alphabet.CreateAlphabet(i + 1, receivedCounts[i]);
+                        }
+                        else if (emoji != null)
+                        {
+                            emoji.CreateEmoji(i + 1, receivedCounts[i]);
+                        }
                     }
                 }
             }
