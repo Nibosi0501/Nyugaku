@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/QR.unity
-    guid: d27f9be66af86409d9c8758c79350dd6
-  - enabled: 1
     path: Assets/Scenes/movie.unity
     guid: 2b1eeab698a2b4957ba0013803b3b034
   - enabled: 1
