@@ -1803,7 +1803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2367c5362f5744cff8ec51bcb45006e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Url: https://www.google.co.jp
+  Url: https://line.udondon.net/web
   status: {fileID: 0}
 --- !u!1 &1883590994
 GameObject:
