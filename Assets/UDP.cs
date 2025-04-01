@@ -87,6 +87,10 @@ public class UdpReceiver : MonoBehaviour
                 {
                     if (receivedCounts[i] > 0)
                     {
+                        if (receivedCounts[i] > 30)
+                        {
+                            receivedCounts[i] = 30;
+                        }
                         if (alphabet != null)
                         {
                             alphabet.CreateAlphabet(i + 1, receivedCounts[i]);
