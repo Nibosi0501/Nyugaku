@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/movie.unity
     guid: 2b1eeab698a2b4957ba0013803b3b034
+  - enabled: 1
+    path: Assets/Scenes/movie_web.unity
+    guid: 131c2224d4d314c8fba6d12ffd7c4154
   - enabled: 1
     path: Assets/Scenes/SenkouStart.unity
     guid: c0d7a15aa97f74d7ca0a41dfd0f2b414
